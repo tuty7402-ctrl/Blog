@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>urw7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F6;
+    --ink: #1A1A1A;
+    --ink-soft: #5C5C5C;
+    --accent: #2D5A4A;
+    --line: #DEDAD2;
+    --card: #F3F1EC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+
+  header {
+    padding: 96px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prompt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    letter-spacing: 0.02em;
+  }
+
+  .prompt .path { color: var(--accent); }
+
+  h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: clamp(40px, 8vw, 64px);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 0.5ch;
+    background: var(--ink);
+    margin-left: 8px;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  .cursor::after { content: '\00a0'; }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  .tagline {
+    margin-top: 18px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 50ch;
+  }
+
+  nav {
+    margin-top: 32px;
+    display: flex;
+    gap: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+  }
+
+  nav a { color: var(--ink); }
+  nav a:hover { color: var(--accent); }
+
+  /* ---------- Section labels ---------- */
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    text-transform: lowercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '#';
+    color: var(--ink-soft);
+  }
+
+  /* ---------- About ---------- */
+
+  .about p {
+    font-size: 16px;
+    color: var(--ink);
+    max-width: 56ch;
+  }
+
+  .about p + p { margin-top: 14px; }
+
+  /* ---------- Directory listing (posts) ---------- */
+
+  .dir-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .empty-listing {
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    padding: 28px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: var(--card);
+  }
+
+  .empty-listing .ghost-line {
+    color: var(--line);
+  }
+
+  .empty-listing .note {
+    margin-top: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Projects ---------- */
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 16px;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+  }
+
+  .project:hover { background: var(--card); }
+
+  .project-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    grid-column: 1 / -1;
+    margin-top: 2px;
+  }
+
+  .project-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 48px 0 80px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer a { color: var(--ink-soft); }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 500px) {
+    header { padding: 64px 0 40px; }
+    .section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <header>
+      <div class="prompt"><span class="path">~/urw7</span> $ whoami</div>
+      <h1>urw7<span class="cursor" aria-hidden="true"></span></h1>
+      <p class="tagline">Building things, breaking things, occasionally documenting the difference. This is where that gets written down.</p>
+      <nav>
+        <a href="#about">about</a>
+        <a href="#posts">posts</a>
+        <a href="#projects">projects</a>
+      </nav>
+    </header>
+
+    <section class="section about" id="about">
+      <div class="eyebrow">about</div>
+      <p>I make software, mostly for myself first. Some of it ships, some of it lives in a repo forever in "almost done" state.</p>
+      <p>This site is the shell — posts go here once there's something worth writing down.</p>
+    </section>
+
+    <section class="section" id="posts">
+      <div class="eyebrow">posts</div>
+      <div class="dir-line">$ ls ./posts</div>
+      <div class="empty-listing">
+        <div class="ghost-line">drwxr-xr-x · empty</div>
+        <div class="note">No posts yet. First one shows up here.</div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="eyebrow">projects</div>
+      <div class="project-list">
+        <div class="project">
+          <span class="project-name">kaze</span>
+          <span class="project-tag">active</span>
+          <span class="project-desc">A WinForms app with an embedded web editor and Discord Rich Presence integration.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 urw7</span>
+      <span>built with static html, deployed on vercel</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
