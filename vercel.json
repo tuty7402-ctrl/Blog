@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/download", "destination": "/api/def850ec39a1" },
+    { "source": "/generate", "destination": "/api/5435088de86bb5" }
+  ]
 }
