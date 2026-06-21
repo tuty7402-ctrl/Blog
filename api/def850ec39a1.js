@@ -20,7 +20,7 @@ export default async function handler(req) {
     return new Response('This link has expired. Please request a new one.', { status: 403 });
   }
 
-  const fileUrl = `https://files.codagaming.xyz/${expiry}.${signature}`;
+  const fileUrl = `https://downloads.codagaming.xyz/${expiry}.${signature}`;
   const fileRes = await fetch(fileUrl);
 
   if (!fileRes.ok || !fileRes.body) {
